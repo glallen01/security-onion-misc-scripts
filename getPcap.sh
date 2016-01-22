@@ -40,7 +40,7 @@ cd $int/dailylogs/$pdate
 rm /tmp/merged.pcap
 
 # find all files created between the times of $2 and $3
-find . -newerct "$2 $3" ! -newerct "$2 $4" | xargs -I {} tcpdump -r {} -w /tmp/{} host $1
+find . -newerct "$2 $3" ! -newerct "$2 $4" | xargs -P 0 -I {} tcpdump -r {} -w /tmp/{} host $1
 # merge all pcaps
 mergecap -w /tmp/merged.pcap /tmp/snort*
 # remove all pcaps used to created the merged pcap
